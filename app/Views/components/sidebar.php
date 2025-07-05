@@ -36,6 +36,15 @@
     </a>
 </li><!-- End Profile Nav -->
 
+<?php if (session()->get('role') === 'admin'): ?>
+<li class="nav-item">
+    <a class="nav-link" href="<?= base_url('admin/diskon') ?>">
+        <i class="bi bi-tag"></i>
+        <span>Manajemen Diskon</span>
+    </a>
+</li>
+<?php endif; ?>
+
           <li class="nav-item">
                 <a class="nav-link <?php echo (uri_string() == 'Contact') ? "" : "collapsed" ?>" href="contact">
                     <i class="bi bi-envelope"></i>

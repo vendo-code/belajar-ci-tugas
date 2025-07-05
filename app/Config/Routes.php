@@ -48,3 +48,16 @@ $routes->get('keranjang', 'TransaksiController::index', ['filter' => 'auth']);
 $routes->get('contact', 'ContactController::index', ['filter' => 'auth']);
 
 $routes->resource('api', ['controller' => 'apiController']);
+
+$routes->group('admin', ['filter' => 'authAdmin'], function($routes) {
+    $routes->get('diskon', 'DiskonController::index');
+    $routes->get('diskon/create', 'DiskonController::create');
+    $routes->post('diskon/store', 'DiskonController::store');
+    $routes->get('diskon/edit/(:num)', 'DiskonController::edit/$1');
+    $routes->post('diskon/update/(:num)', 'DiskonController::update/$1');
+    $routes->get('diskon/delete/(:num)', 'DiskonController::delete/$1');
+});
+$routes->get('transaksi/cart_delete/(:any)', 'TransaksiController::cart_delete/$1');
+
+$routes->post('transaksi/add', 'TransaksiController::add');
+

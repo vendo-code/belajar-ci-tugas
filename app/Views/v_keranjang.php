@@ -12,37 +12,24 @@ if (session()->getFlashData('success')) {
 ?>
 <?php echo form_open('keranjang/edit') ?>
 <!-- Table with stripped rows -->
-<table class="table datatable">
+<table class="table">
     <thead>
         <tr>
-            <th scope="col">Nama</th>
-            <th scope="col">Foto</th>
-            <th scope="col">Harga</th>
-            <th scope="col">Jumlah</th>
-            <th scope="col">Subtotal</th>
-            <th scope="col">Aksi</th>
+            <th>Nama Produk</th>
+            <th>Harga Asli</th>
+            <th>Diskon</th>
+            <th>Harga Setelah Diskon</th>
         </tr>
     </thead>
     <tbody>
-        <?php
-        $i = 1;
-        if (!empty($items)) :
-            foreach ($items as $index => $item) :
-        ?>
-                <tr>
-                    <td><?php echo $item['name'] ?></td>
-                    <td><img src="<?php echo base_url() . "img/" . $item['options']['foto'] ?>" width="100px"></td>
-                    <td><?php echo number_to_currency($item['price'], 'IDR') ?></td>
-                    <td><input type="number" min="1" name="qty<?php echo $i++ ?>" class="form-control" value="<?php echo $item['qty'] ?>"></td>
-                    <td><?php echo number_to_currency($item['subtotal'], 'IDR') ?></td>
-                    <td>
-                        <a href="<?php echo base_url('keranjang/delete/' . $item['rowid'] . '') ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a>
-                    </td>
-                </tr>
-        <?php
-            endforeach;
-        endif;
-        ?>
+        <?php foreach ($cart->contents() as $item): ?>
+        <tr>
+            <td><?= $item['name'] ?></td>
+            <td>Rp <?= number_format($item['options']['harga_asli']) ?></td>
+            <td>Rp <?= number_format($item['options']['diskon']) ?></td>
+            <td>Rp <?= number_format($item['price']) ?></td>
+        </tr>
+        <?php endforeach ?>
     </tbody>
 </table>
 <!-- End Table with stripped rows -->
@@ -55,5 +42,11 @@ if (session()->getFlashData('success')) {
 <?php if (!empty($items)) : ?>
     <a class="btn btn-success" href="<?php echo base_url() ?>checkout">Selesai Belanja</a>
 <?php endif; ?>
+<?php if (session()->get('diskon_nominal')) : ?>
+    <div style="color: green;">
+        Diskon Hari Ini: Rp<?= number_format(session()->get('diskon_nominal'), 0, ',', '.') ?>
+    </div>
+<?php endif; ?>
+
 <?php echo form_close() ?>
 <?= $this->endSection() ?>

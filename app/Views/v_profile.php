@@ -27,7 +27,14 @@ History Transaksi Pembelian <strong><?= $username ?></strong>
                         <td><?php echo $item['created_at'] ?></td>
                         <td><?php echo number_to_currency($item['total_harga'], 'IDR') ?></td>
                         <td><?php echo $item['alamat'] ?></td>
-                        <td><?php echo ($item['status'] == "1") ? "Sudah Selesai" : "Belum Selesai" ?></td>
+                            <td>
+                               
+ <?php if ((string) $item['status'] === '1') : ?>
+    <span class="badge bg-success">Selesai</span>
+<?php else : ?>
+    <span class="badge bg-warning text-dark">Belum Selesai</span>
+<?php endif; ?>
+</td>
                         <td>
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal-<?= $item['id'] ?>">
                                 Detail
@@ -50,11 +57,15 @@ History Transaksi Pembelian <strong><?= $username ?></strong>
 	                                        <?php if ($item2['foto'] != '' and file_exists("img/" . $item2['foto'] . "")) : ?>
 	                                            <img src="<?php echo base_url() . "img/" . $item2['foto'] ?>" width="100px">
 	                                        <?php endif; ?>
-	                                        <strong><?= $item2['nama'] ?></strong>
-	                                        <?= number_to_currency($item2['harga'], 'IDR') ?>
-	                                        <br>
-	                                        <?= "(" . $item2['jumlah'] . " pcs)" ?><br>
-	                                        <?= number_to_currency($item2['subtotal_harga'], 'IDR') ?>
+	                                       <strong><?= $item2['nama'] ?></strong><br>
+                                                Harga Asli: <?= number_to_currency($item2['harga_asli'], 'IDR') ?><br>
+
+                                                <?php if (isset($item2['diskon']) && $item2['diskon'] > 0): ?>
+                                                    Diskon: Rp<?= number_format($item2['diskon'], 0, ',', '.') ?><br>
+                                                <?php endif; ?>
+
+                                                Subtotal Akhir: <?= number_to_currency($item2['subtotal_harga'], 'IDR') ?>
+
 	                                        <hr>
 	                                    <?php 
 	                                    endforeach; 

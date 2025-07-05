@@ -18,17 +18,27 @@ class Home extends BaseController
         helper('form');
         helper('number');
         $this->product = new ProductModel();
-        $this->transaction = new Transaction();
+        $this->transaction = new TransactionModel();
         $this->transaction_detail = new TransactionDetailModel();
      }
 
-    public function index(): string
-    {
-        $product = $this->product->findAll();
-        $data['product'] = $product;
+   public function index(): string
+{
+    $product = $this->product->findAll();
 
-       return view('v_home', $data);
+    $diskonModel = new \App\Models\DiskonModel();
+    $tanggalHariIni = date('Y-m-d');
+    $diskon = $diskonModel->where('tanggal', $tanggalHariIni)->first();
+
+    if ($diskon) {
+        session()->set('diskon_nominal', $diskon['nominal']);
     }
+
+    $data['product'] = $product;
+
+    return view('v_home', $data);
+}
+
 
     public function profile()
 {
@@ -42,7 +52,12 @@ class Home extends BaseController
 
     if (!empty($buy)) {
         foreach ($buy as $item) {
-            $detail = $this->transaction_detail->select('transaction_detail.*, product.nama, product.harga, product.foto')->join('product', 'transaction_detail.product_id=product.id')->where('transaction_id', $item['id'])->findAll();
+           $detail = $this->transaction_detail
+    ->select('transaction_detail.*, product.nama, product.harga AS harga_asli, product.foto')
+    ->join('product', 'transaction_detail.product_id = product.id')
+    ->where('transaction_id', $item['id'])
+    ->findAll();
+
 
             if (!empty($detail)) {
                 $product[$item['id']] = $detail;

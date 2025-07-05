@@ -109,3 +109,39 @@ Proyek menggunakan struktur MVC CodeIgniter 4:
    ```bash
    php spark migrate
    php spark db:seed DiskonSeeder
+
+
+                                     (# UAS Praktikum PWL - Manajemen Diskon dan Transaksi (CodeIgniter 4))
+
+
+## Nama
+Nama: Arvendo Doni Duwi Mahendra
+NIM: A11.2023.15489
+Kelas: A11.4419
+## Deskripsi Aplikasi
+Aplikasi ini dibangun menggunakan **CodeIgniter 4** sebagai bagian dari **Ujian Akhir Semester
+Praktikum Web Lanjut**. Aplikasi ini memiliki fitur:
+- Login & Logout pengguna
+- Role-based access (user dan admin)
+- Manajemen Produk
+- Manajemen Diskon (admin only)
+- Diskon otomatis diterapkan ke keranjang sesuai tanggal hari ini
+- Fitur Keranjang Belanja (Cart)
+- Checkout transaksi
+- Penyimpanan ke database (transaction dan transaction_detail)
+- Riwayat Transaksi pengguna
+- Tampilan menggunakan Bootstrap 5
+## Cara Menjalankan Proyek
+1. Clone atau download repository ini
+2. Import database ke MySQL/phpMyAdmin
+3. Atur file `.env`
+4. Jalankan dengan `php spark serve`
+5. Akses di browser: http://localhost:8080
+## Akun Login
+### Admin:
+- Username: Arvendo Duwi
+- Password: 123456
+### User:
+- Username: Sherly
+- Password: 123456
+

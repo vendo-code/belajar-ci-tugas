@@ -110,9 +110,8 @@ Proyek menggunakan struktur MVC CodeIgniter 4:
    php spark migrate
    php spark db:seed DiskonSeeder
 
-
-                                     (# UAS Praktikum PWL - Manajemen Diskon dan Transaksi (CodeIgniter 4))
-
+ 
+(# UAS Praktikum PWL - Manajemen Diskon dan Transaksi (CodeIgniter 4))
 
 ## Nama
 Nama: Arvendo Doni Duwi Mahendra

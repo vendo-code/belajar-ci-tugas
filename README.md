@@ -139,8 +139,8 @@ Praktikum Web Lanjut**. Aplikasi ini memiliki fitur:
 ## Akun Login
 ### Admin:
 - Username: Arvendo Duwi
-- Password: 123456
+- Password: 1234567
 ### User:
 - Username: Sherly
-- Password: 123456
+- Password: 1234567
 
